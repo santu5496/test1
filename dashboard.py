@@ -1,5 +1,5 @@
 # dashboard.py
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, redirect, url_for
 from model import DisasterPredictor
 
 dashboard_bp = Blueprint('dashboard', __name__)
@@ -10,7 +10,7 @@ predictor.load_model()
 
 @dashboard_bp.route('/predict', methods=['POST'])
 def predict():
-    data = request.get_json()
+    data = request.get_json(force=True)
 
     # Make a prediction using the loaded model
     disaster_type = predictor.predict(data)
@@ -23,6 +23,13 @@ def predict():
     
 
     return jsonify({'disaster_type': disaster_type})
+
+@dashboard_bp.route('/submit', methods=['POST'])
+def submit():
+    
+    
+    return redirect(url_for('static', filename='script.js'))
+
 ```
 ```python
 # app.py
