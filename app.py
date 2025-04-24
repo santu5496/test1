@@ -52,6 +52,18 @@ def register():
     db.session.commit()
     return jsonify({'message': 'User created successfully'}), 201
 
+@app.route('/predict', methods=['POST'])  # Make sure you have methods=['POST']
+def predict():
+    if request.method == 'POST':
+        data = request.get_json()
+        # ... Your prediction logic using the data ...
+        # ... Example: Let's just return some dummy data for now ...
+        prediction = "Flood"  # Replace with your actual prediction
+        probability = 0.85  # Replace with your actual probability
+        return jsonify({'disaster_type': prediction, 'probability': probability})
+    return "not"
+
+
 @app.route('/')
 def index():
     return redirect(url_for('static', filename='dashboard.html'))
