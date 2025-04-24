@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <script>
+        if (!sessionStorage.getItem('userLoggedIn')) {
+            window.location.href = "/"; // Redirect to the login page if not logged in
+        }
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" integrity="sha512-yFj8U0qM0sL+bNlR07n4n3J0Y0p3vX7xZ1Q6f3zVzU2uP68x5hN5n2T1tOq1WjFf9f4z8B5z2F5vB7Ff9Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unified Disaster Management Dashboard</title>
     <link
@@ -32,6 +40,16 @@
         
         header p {
           margin: 5px 0;
+        }
+        .logout-btn {
+          background-color: #dc3545; /* Red color */
+          color: white;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          float: right;
         }
         
         nav {
@@ -201,7 +219,7 @@
     <header>
         <h1><i class="fas fa-shield-alt"></i> Unified Disaster Management Dashboard</h1>
         <p>Welcome, [User Name]!</p>
-        <button class="logout-btn">Logout</button>
+        <button id="logoutButton" class="logout-btn">Logout</button>
     </header>
     <nav>
         <ul>
@@ -422,6 +440,15 @@
                 console.error('Error:', error);
             });
         });
+        
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            // Remove the login status from sessionStorage
+            sessionStorage.removeItem('userLoggedIn');
+            
+            // Redirect to the index page
+            window.location.href = "/";
+        });
+
       </script>
       </body>
       </html>
