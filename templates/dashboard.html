@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unified Disaster Management Dashboard</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
 </head>
 <body>
     <header>
-        <h1>Welcome, [User Name]!</h1>
+        <h1><i class="fas fa-shield-alt"></i> Unified Disaster Management Dashboard</h1>
+        <p>Welcome, [User Name]!</p>
         <button class="logout-btn">Logout</button>
     </header>
     <nav>
@@ -17,19 +22,32 @@
         </ul>
     </nav>
     <main>
-        <section id="disaster-prediction" class="dashboard-section">
-            <h2>Disaster Prediction</h2>
-            <form id="weather-data-form">
+        <section id="disaster-prediction" class="dashboard-section">            
+            <h2 class="section-title">
+                <i class="fas fa-chart-line"></i> Disaster Prediction
+              </h2>
+            <form id="weather-data-form" class="data-form">
                 <div class="form-group">
-                    <label for="temperature">Temperature (°C):</label>
-                    <input type="number" id="temperature" name="temperature" required>
-                </div>
-                <div class="form-group">
-                    <label for="rainfall">Rainfall (mm):</label>
-                    <input type="number" id="rainfall" name="rainfall" required>
-                </div>
-                <div class="form-group">
-                    <label for="wind-speed">Wind Speed (km/h):</label>
+                    <i class="fas fa-thermometer-half"></i>
+                    <label for="temperature">Temperature</label>
+                    <div class="input-group">
+                      <input type="number" id="temperature" name="temperature" required />
+                      <span class="unit">°C</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <i class="fas fa-cloud-rain"></i>
+                    <label for="rainfall">Rainfall</label>
+                    <div class="input-group">
+                      <input type="number" id="rainfall" name="rainfall" required />
+                      <span class="unit">mm</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <i class="fas fa-wind"></i>
+                    <label for="wind-speed">Wind Speed</label>
+
+                    <div class="input-group">
                     <input type="number" id="wind-speed" name="wind-speed" required>
                 </div>
                 <div class="form-group">
@@ -41,37 +59,42 @@
                     <input type="text" id="location" name="location">
                 </div>
                 <button type="submit" class="predict-btn">Predict Disaster</button>
-            </form>
-            <div id="prediction-outcome">
-                <p>Based on the current weather data, the likelihood of a flood occurring is High.</p>
+              </form>
+              <div id="prediction-outcome">
+                <p>
+                  Based on the current weather data, the likelihood of a flood
+                  occurring is High.
+                </p>
             </div>
         </section>
 
         <section id="disaster-alerts" class="dashboard-section">
-            <h2>Disaster Alerts</h2>
-            <div class="alert-item">
-                <div class="alert-header">
-                    <h3>Flood Alert</h3>
-                    <span class="severity-high">High</span>
-                </div>
-                <p>Affected Area: Downtown Riverfront</p>
-                <p>Alert Date & Time: 2024-04-25 08:00</p>
-            </div>
-            <div class="alert-item">
-                <div class="alert-header">
-                    <h3>Cyclone/Storm Alert</h3>
-                    <span class="severity-medium">Medium</span>
-                </div>
-                <p>Affected Area: Coastal Regions</p>
-                <p>Alert Date & Time: 2024-04-26 12:00</p>
-            </div>
-            <div class="alert-item">
-                <div class="alert-header">
-                    <h3>Earthquake Warning</h3>
-                    <span class="severity-low">Low</span>
-                </div>
-                <p>Affected Area: Mountainous Area</p>
-                <p>Alert Date & Time: 2024-04-27 15:30</p>
+            <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> Disaster Alerts</h2>
+            <div class="alert-list">
+              <div class="alert-item">
+                  <div class="alert-header">
+                      <h3><i class="fas fa-water"></i> Flood Alert</h3>
+                      <span class="severity-high">High</span>
+                  </div>
+                  <p>Affected Area: Downtown Riverfront</p>
+                  <p>Alert Date & Time: 2024-04-25 08:00</p>
+              </div>
+              <div class="alert-item">
+                  <div class="alert-header">
+                      <h3><i class="fas fa-cloud-showers-heavy"></i> Cyclone/Storm Alert</h3>
+                      <span class="severity-medium">Medium</span>
+                  </div>
+                  <p>Affected Area: Coastal Regions</p>
+                  <p>Alert Date & Time: 2024-04-26 12:00</p>
+              </div>
+              <div class="alert-item">
+                  <div class="alert-header">
+                      <h3><i class="fas fa-mountain"></i> Earthquake Warning</h3>
+                      <span class="severity-low">Low</span>
+                  </div>
+                  <p>Affected Area: Mountainous Area</p>
+                  <p>Alert Date & Time: 2024-04-27 15:30</p>
+              </div>
             </div>
 
             <!-- Container for active alerts -->
@@ -81,15 +104,18 @@
         </section>
 
         <section id="report-incident" class="dashboard-section">
-            <h2>Report an Incident</h2>
+            <h2 class="section-title"><i class="fas fa-bullhorn"></i> Report an Incident</h2>
             <form id="incident-report-form">
                 <div class="form-group">
-                    <label for="incident-description">Incident Description:</label>
-                    <textarea id="incident-description" name="incident-description" required></textarea>
+                    <label for="incident-description">Description</label>
+                    <textarea id="incident-description" name="incident-description" required placeholder="Describe the incident..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="incident-location">Location:</label>
-                    <input type="text" id="incident-location" name="incident-location">
+                    <label for="incident-location">Location</label>
+                    <div class="input-group">
+                      <i class="fas fa-map-marker-alt"></i>
+                      <input type="text" id="incident-location" name="incident-location" placeholder="Enter location...">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="incident-image">Upload Image:</label>
@@ -100,8 +126,9 @@
         </section>
 
         <section id="emergency-guidelines" class="dashboard-section">
-    <h2>Emergency Guidelines</h2>
-    <div class="guideline-cards">
+          <h2 class="section-title"><i class="fas fa-book"></i> Emergency Guidelines</h2>
+          <div class="guideline-cards">
+          <div class="card-list">
         <div class="guideline-card">
             <div class="card-header">
                 <h3>Flood Safety Tips</h3>
@@ -163,16 +190,20 @@
             </div>
         </div>
         <div class="guideline-card">
+          <div class="card-header">
             <h3>Wildfire Safety Tips</h3>
+            <button class="expand-btn">+</button>
+          </div>
+          <div class="card-content">
             <p>Stay informed, clear vegetation, have a plan.</p>
+          </div>
         </div>
+      </div>
                 </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
+              </section>
+              </main>
+              <footer>
         <p>&copy; 2024 Disaster Management System</p>
-    </footer>
-</body>
-</html>
+      </footer>
+      </body>
+      </html>

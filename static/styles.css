@@ -1,14 +1,31 @@
 /* styles.css */
 
+/* Resetting some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h2 {
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
 }
 
 .container {
+    max-width: 1100px;
     width: 80%;
     margin: auto;
     overflow: hidden;
@@ -16,103 +33,148 @@ body {
 
 /* Header Section */
 header {
-    background: #35424a;
-    color: #ffffff;
-    padding-top: 20px;
-    min-height: 70px;
-    border-bottom: #e8491d 3px solid;
+  background: #2c3e50; /* Darker background for header */
+  color: #ffffff;
+  padding: 15px 0;
+  border-bottom: 4px solid #e74c3c; /* Stronger border */
+  margin-bottom: 20px;
 }
 
 header a {
-    color: #ffffff;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 15px;
+  transition: color 0.3s ease;
 }
 
 header ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    overflow: hidden;
+  list-style: none;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 header li {
-    float: left;
-    display: inline;
-    padding: 0 20px 0 20px;
+  display: inline-block;
+  margin: 0 15px;
+  padding: 10px;
 }
 
 header #branding {
-    float: left;
+  float: left;
 }
 
 header #branding h1 {
-    margin: 0;
+  margin: 0;
 }
 
 header nav {
-    float: right;
-    margin-top: 10px;
+  float: right;
+  margin-top: 10px;
 }
 
-header .highlight, header .current a {
-    color: #e8491d;
-    font-weight: bold;
+header .highlight,
+header .current a {
+  color: #e74c3c; /* Brighter highlight color */
+  font-weight: bold;
 }
 
 header a:hover {
-    color: #cccccc;
-    font-weight: bold;
+  color: #ecf0f1; /* Lighter hover color */
 }
 
 /* Welcome Message */
 .welcome-message {
-    background-color: #e0e0e0;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+  background-color: #ecf0f1;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  text-align: center;
 }
 
 /* Disaster Prediction Feature */
 .prediction-feature {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .prediction-feature h2 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .weather-form {
-    margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .weather-form label {
-    display: block;
-    margin-bottom: 5px;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
 
 .weather-form input[type="number"],
 .weather-form input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.weather-form input[type="number"]:focus,
+.weather-form input[type="text"]:focus{
+    border-color: #e74c3c;
+    outline: none;
 }
 
 .weather-form button {
-    background-color: #e8491d;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.weather-form button:hover {
+  background-color: #c0392b; /* Darken on hover */
+}
+
+/* Style for form elements */
+form .form-group {
+    margin-bottom: 20px; /* Increased margin for spacing */
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease; /* Smooth border transition on focus */
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form textarea:focus {
+    border-color: #e74c3c; /* Highlight color on focus */
+    outline: none; /* Remove the default focus outline */
 }
 
 .prediction-outcome {
@@ -124,23 +186,23 @@ header a:hover {
 
 /* Disaster Alerts Section */
 .disaster-alerts {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .disaster-alerts h2 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .alert-item {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .alert-item strong {
@@ -149,24 +211,19 @@ header a:hover {
 
 /* Report an Incident */
 .incident-report {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .incident-report h2 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .incident-report textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
+    min-height: 100px;
 }
 
 .incident-report button {
@@ -178,22 +235,29 @@ header a:hover {
     cursor: pointer;
 }
 
+footer {
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: auto;
+}
+
 /* Emergency Guidelines */
 .emergency-guidelines {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .guideline-card {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .guideline-card.expanded {
