@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from dashboard import dashboard_bp
@@ -51,6 +51,10 @@ def register():
     db.session.add(user)
     db.session.commit()
     return jsonify({'message': 'User created successfully'}), 201
+
+@app.route('/')
+def index():
+    return redirect(url_for('static', filename='dashboard.html'))
 
 
 
