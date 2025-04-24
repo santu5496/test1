@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unified Disaster Management Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome, [User Name]!</h1>
+        <button class="logout-btn">Logout</button>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Disaster Types</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="disaster-prediction" class="dashboard-section">
+            <h2>Disaster Prediction</h2>
+            <form id="weather-data-form">
+                <div class="form-group">
+                    <label for="temperature">Temperature (°C):</label>
+                    <input type="number" id="temperature" name="temperature" required>
+                </div>
+                <div class="form-group">
+                    <label for="rainfall">Rainfall (mm):</label>
+                    <input type="number" id="rainfall" name="rainfall" required>
+                </div>
+                <div class="form-group">
+                    <label for="wind-speed">Wind Speed (km/h):</label>
+                    <input type="number" id="wind-speed" name="wind-speed" required>
+                </div>
+                <div class="form-group">
+                    <label for="humidity">Humidity (%):</label>
+                    <input type="number" id="humidity" name="humidity" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location">
+                </div>
+                <button type="submit" class="predict-btn">Predict Disaster</button>
+            </form>
+            <div id="prediction-outcome">
+                <p>Based on the current weather data, the likelihood of a flood occurring is High.</p>
+            </div>
+        </section>
+
+        <section id="disaster-alerts" class="dashboard-section">
+            <h2>Disaster Alerts</h2>
+            <div class="alert-item">
+                <div class="alert-header">
+                    <h3>Flood Alert</h3>
+                    <span class="severity-high">High</span>
+                </div>
+                <p>Affected Area: Downtown Riverfront</p>
+                <p>Alert Date & Time: 2024-04-25 08:00</p>
+            </div>
+            <div class="alert-item">
+                <div class="alert-header">
+                    <h3>Cyclone/Storm Alert</h3>
+                    <span class="severity-medium">Medium</span>
+                </div>
+                <p>Affected Area: Coastal Regions</p>
+                <p>Alert Date & Time: 2024-04-26 12:00</p>
+            </div>
+            <div class="alert-item">
+                <div class="alert-header">
+                    <h3>Earthquake Warning</h3>
+                    <span class="severity-low">Low</span>
+                </div>
+                <p>Affected Area: Mountainous Area</p>
+                <p>Alert Date & Time: 2024-04-27 15:30</p>
+            </div>
+
+            <!-- Container for active alerts -->
+            <div class="alert-list">
+                <!-- Active alerts will be displayed here -->
+            </div>
+        </section>
+
+        <section id="report-incident" class="dashboard-section">
+            <h2>Report an Incident</h2>
+            <form id="incident-report-form">
+                <div class="form-group">
+                    <label for="incident-description">Incident Description:</label>
+                    <textarea id="incident-description" name="incident-description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="incident-location">Location:</label>
+                    <input type="text" id="incident-location" name="incident-location">
+                </div>
+                <div class="form-group">
+                    <label for="incident-image">Upload Image:</label>
+                    <input type="file" id="incident-image" name="incident-image" accept="image/*">
+                </div>
+                <button type="submit" class="submit-report-btn">Submit Report</button>
+            </form>
+        </section>
+
+        <section id="emergency-guidelines" class="dashboard-section">
+    <h2>Emergency Guidelines</h2>
+    <div class="guideline-cards">
+        <div class="guideline-card">
+            <div class="card-header">
+                <h3>Flood Safety Tips</h3>
+                <button class="expand-btn">+</button>
+            </div>
+            <div class="card-content">
+                <ul>
+                    <li>Move to higher ground.</li>
+                    <li>Stay informed about flood alerts.</li>
+                    <li>Avoid walking or driving through floodwaters.</li>
+                    <li>Turn off utilities if instructed to do so.</li>
+                    <li>Have an emergency kit ready.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="guideline-card">
+            <div class="card-header">
+                <h3>Cyclone Safety Tips</h3>
+                <button class="expand-btn">+</button>
+            </div>
+            <div class="card-content">
+                <ul>
+                    <li>Stay indoors during a cyclone.</li>
+                    <li>Board up or protect windows.</li>
+                    <li>Monitor weather reports closely.</li>
+                    <li>Have a supply of food, water, and medicines.</li>
+                    <li>Secure loose objects around your property.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="guideline-card">
+            <div class="card-header">
+                <h3>Earthquake Safety Tips</h3>
+                <button class="expand-btn">+</button>
+            </div>
+            <div class="card-content">
+                <ul>
+                    <li>Drop, cover, and hold on.</li>
+                    <li>Stay away from windows and heavy objects.</li>
+                    <li>If outside, move to an open area away from buildings.</li>
+                    <li>Aftershocks can occur; be prepared.</li>
+                    <li>Check for injuries and damage after the shaking stops.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="guideline-card">
+            <div class="card-header">
+                <h3>Fire Safety Tips</h3>
+                <button class="expand-btn">+</button>
+            </div>
+            <div class="card-content">
+                <ul>
+                    <li>Have working smoke alarms.</li>
+                    <li>Know two ways out of every room.</li>
+                    <li>Stop, drop, and roll if your clothes catch fire.</li>
+                    <li>Don't overload electrical outlets.</li>
+                    <li>Have a fire extinguisher and know how to use it.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="guideline-card">
+            <h3>Wildfire Safety Tips</h3>
+            <p>Stay informed, clear vegetation, have a plan.</p>
+        </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Disaster Management System</p>
+    </footer>
+</body>
+</html>
