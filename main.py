@@ -26,11 +26,10 @@ def before_request():
         os.makedirs(os.path.dirname(DATABASE), exist_ok=True)
         init_db()
 
-@app.route("/")
-def hello_world():
-    """Example Hello World route."""
-    name = os.environ.get("NAME", "World")
-    return f"Hello {name}!"
+@app.route('/')
+def index():
+    """Render the login page."""
+    return render_template('login.html')
 
 @app.route('/static/<path:filename>')
 def serve_static(filename):
