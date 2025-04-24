@@ -213,7 +213,7 @@
             <h2 class="section-title">
                 <i class="fas fa-chart-line"></i> Disaster Prediction
               </h2>
-            <form id="weather-data-form" class="data-form">
+            <form id="weather-data-form" action="#" class="data-form">
                 <div class="form-group">
                     <i class="fas fa-thermometer-half"></i>
                     <label for="temperature">Temperature</label>
@@ -401,7 +401,7 @@
             formData.forEach((value, key) => {
                 data[key] = value;
             });
-            fetch('/predict', {
+            fetch('http://127.0.0.1:5000/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
