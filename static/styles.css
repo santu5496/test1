@@ -9,8 +9,8 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f8f8;
-  color: #333;
+  background-color: #333;
+  color: #fff;
   line-height: 1.6;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@ body {
 }
 
 h2 {
-  color: #333;
+  color: #fff;
   border-bottom: 2px solid #ddd;
   padding-bottom: 5px;
   margin-bottom: 15px;
@@ -86,10 +86,10 @@ header a:hover {
 
 /* Welcome Message */
 .welcome-message {
-  background-color: #ecf0f1;
+  background-color: #444;
   padding: 20px;
   margin-bottom: 25px;
-  border-radius: 5px;
+    border-radius: 5px;
   text-align: center;
 }
 
@@ -130,7 +130,7 @@ header a:hover {
 .weather-form input[type="number"]:focus,
 .weather-form input[type="text"]:focus{
     border-color: #e74c3c;
-    outline: none;
+    outline: none; 
 }
 
 .weather-form button {
@@ -178,15 +178,15 @@ form textarea:focus {
 }
 
 .prediction-outcome {
-    background-color: #f9f9f9;
+    background-color: #444;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #555;
     border-radius: 4px;
 }
 
 /* Disaster Alerts Section */
 .disaster-alerts {
-  background-color: #fff;
+  background-color: #444;
   padding: 20px;
   margin-bottom: 25px;
   border-radius: 5px;
@@ -198,10 +198,10 @@ form textarea:focus {
 }
 
 .alert-item {
-  background-color: #f9f9f9;
+  background-color: #555;
   padding: 15px;
   margin-bottom: 15px;
-  border: 1px solid #ddd;
+    border: 1px solid #777;
   border-radius: 4px;
 }
 
@@ -211,7 +211,7 @@ form textarea:focus {
 
 /* Report an Incident */
 .incident-report {
-  background-color: #fff;
+  background-color: #444;
   padding: 20px;
   margin-bottom: 25px;
   border-radius: 5px;
@@ -245,14 +245,14 @@ footer {
 
 /* Emergency Guidelines */
 .emergency-guidelines {
-  background-color: #fff;
+  background-color: #444;
   padding: 20px;
   margin-bottom: 25px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.guideline-card {
+.guideline-card { 
   background-color: #f9f9f9;
   padding: 15px;
   margin-bottom: 15px;

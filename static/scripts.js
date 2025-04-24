@@ -15,7 +15,17 @@ document.getElementById('weather-data-form').addEventListener('submit', function
     .then(response => response.json())
     .then(data => {
         const predictionOutcome = document.getElementById('prediction-outcome');
-        predictionOutcome.textContent = `Prediction: ${data.disaster_type}`;
+        predictionOutcome.innerHTML = ''; // Clear previous content
+        if (typeof data === 'object' && data !== null) {
+          for (const key in data) {
+              if (data.hasOwnProperty(key)) {
+                  const value = data[key];
+                  const paragraph = document.createElement('p');
+                  paragraph.textContent = `${key}: ${value}`;
+                  predictionOutcome.appendChild(paragraph);
+              }
+          }
+        }
     })
     .catch(error => {
         console.error('Error:', error);
