@@ -9,26 +9,26 @@ predictor = DisasterPredictor()
 predictor.load_model()
 
 @dashboard_bp.route('/predict', methods=['POST'])
-def predict():
-    data = request.get_json(force=True)
+def predict_route():
+    try:
+        data = request.get_json(force=True)
 
-    # Make a prediction using the loaded model
-    disaster_type = predictor.predict(data)
-    temperature = data.get('temperature')
-    rainfall = data.get('rainfall')
-    wind_speed = data.get('wind-speed')
-    humidity = data.get('humidity')
-    location = data.get('location')
+        # Make a prediction using the loaded model
+        disaster_type = predictor.predict(data)
 
-    
+        return jsonify({'disaster_type': disaster_type})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-    return jsonify({'disaster_type': disaster_type})
-
+@dashboard_bp.route('/call_predict', methods=['POST'])
+def call_predict():
+    return redirect(url_for('predict_route'))
 @dashboard_bp.route('/submit', methods=['POST'])
 def submit():
     
     
     return redirect(url_for('static', filename='script.js'))
+
 
 ```
 ```python
