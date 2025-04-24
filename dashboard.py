@@ -8,25 +8,17 @@ dashboard_bp = Blueprint('dashboard', __name__)
 predictor = DisasterPredictor()
 predictor.load_model()
 
-@dashboard_bp.route('/predict', methods=['POST'])
-def predict_route():
+@dashboard_bp.route('/call_predict', methods=['POST'])
+def call_predict():    
     try:
         data = request.get_json(force=True)
-
-        # Make a prediction using the loaded model
         disaster_type = predictor.predict(data)
-
         return jsonify({'disaster_type': disaster_type})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@dashboard_bp.route('/call_predict', methods=['POST'])
-def call_predict():
-    return redirect(url_for('predict_route'))
 @dashboard_bp.route('/submit', methods=['POST'])
 def submit():
-    
-    
     return redirect(url_for('static', filename='script.js'))
 
 

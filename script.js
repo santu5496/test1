@@ -1,5 +1,5 @@
 function handleSubmit() {
-  fetch('/run_prediction', { method: 'POST' })
+  fetch('/call_predict', { method: 'POST' })
     .then(response => {
       if (response.ok) {
         console.log('Python function called successfully');
