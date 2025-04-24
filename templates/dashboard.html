@@ -4,11 +4,198 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Unified Disaster Management Dashboard</title>
-    <link rel="stylesheet" href="/static/styles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+        <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #1e1e1e;
+          color: #fff;
+        }
+        
+        header {
+          background-color: #282828;
+          color: #fff;
+          padding: 10px 20px;
+          text-align: center;
+          border-bottom: 2px solid #444;
+        }
+        
+        header h1 {
+          margin: 0;
+          font-size: 24px;
+        }
+        
+        header p {
+          margin: 5px 0;
+        }
+        
+        nav {
+          background-color: #333;
+          color: #fff;
+          padding: 10px;
+          border-bottom: 2px solid #444;
+        }
+        
+        nav ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          justify-content: center;
+        }
+        
+        nav li {
+          margin: 0 15px;
+        }
+        
+        nav a {
+          color: #fff;
+          text-decoration: none;
+          font-weight: bold;
+          transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+          color: #007bff;
+        }
+        
+        main {
+          padding: 20px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+        }
+        
+        .dashboard-section {
+          background-color: #282828;
+          border: 1px solid #444;
+          padding: 20px;
+          margin: 10px;
+          border-radius: 5px;
+          width: calc(40% - 20px);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-title {
+          color: #fff;
+          border-bottom: 1px solid #444;
+          padding-bottom: 10px;
+          margin-bottom: 15px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        
+        .data-form {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 10px;
+        }
+        
+        .form-group label {
+          margin-bottom: 5px;
+          font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+          padding: 8px;
+          border: 1px solid #444;
+          border-radius: 3px;
+          background-color: #333;
+          color: #fff;
+        }
+        
+        .input-group {
+          display: flex;
+          align-items: center;
+        }
+        
+        .unit {
+          margin-left: 5px;
+          color: #fff;
+        }
+        
+        .predict-btn,
+        .submit-report-btn {
+          background-color: #007bff;
+          color: white;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+        
+        .predict-btn:hover,
+        .submit-report-btn:hover {
+          background-color: #0056b3;
+        }
+        
+        .alert-list {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        
+        .alert-item {
+          background-color: #333;
+          padding: 10px;
+          border-radius: 3px;
+          border: 1px solid #444;
+        }
+        
+        .alert-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+        
+        .severity-high {
+          color: red;
+        }
+        
+        .severity-medium {
+          color: orange;
+        }
+        
+        .severity-low {
+          color: green;
+        }
+        
+        .guideline-cards {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        
+        .guideline-card {
+          background-color: #333;
+          padding: 10px;
+          border-radius: 3px;
+          border: 1px solid #444;
+          flex: 1 1 calc(33.33% - 10px);
+        }
+        
+        footer {
+          text-align: center;
+          padding: 10px;
+          background-color: #282828;
+          border-top: 2px solid #444;
+        }
+        </style>
 </head>
 <body>
     <header>
@@ -33,7 +220,7 @@
                     <div class="input-group">
                       <input type="number" id="temperature" name="temperature" required />
                       <span class="unit">°C</span>
-                    </div>
+                    </div>                  
                   </div>
                   <div class="form-group">
                     <i class="fas fa-cloud-rain"></i>
@@ -48,14 +235,15 @@
                     <label for="wind-speed">Wind Speed</label>
 
                     <div class="input-group">
-                    <input type="number" id="wind-speed" name="wind-speed" required>
+                    <input type="number" id="wind-speed" name="wind-speed" required/>
+                    <span class="unit">km/h</span>
                 </div>
                 <div class="form-group">
-                    <label for="humidity">Humidity (%):</label>
-                    <input type="number" id="humidity" name="humidity" required>
+                  <label for="humidity">Humidity (%):</label>
+                  <input type="number" id="humidity" name="humidity" required/>
                 </div>
                 <div class="form-group">
-                    <label for="location">Location:</label>
+                    <label for="location">Location</label>
                     <input type="text" id="location" name="location">
                 </div>
                 <button type="submit" class="predict-btn">Predict Disaster</button>
@@ -205,5 +393,35 @@
               <footer>
         <p>&copy; 2024 Disaster Management System</p>
       </footer>
+      <script>
+        document.getElementById('weather-data-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const predictionOutcome = document.getElementById('prediction-outcome');
+                predictionOutcome.innerHTML = ''; 
+                for (const key in data) {
+                    const paragraph = document.createElement('p');
+                    paragraph.textContent = `${key}: ${data[key]}`;
+                    predictionOutcome.appendChild(paragraph);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+      </script>
       </body>
       </html>
