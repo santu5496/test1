@@ -12,6 +12,7 @@ def get_db():
     return db
 
 def init_db():
+
     """Initialize the database with tables."""
     db = get_db()
     with open('schema.sql', 'r') as f:
@@ -62,6 +63,17 @@ def register():
     finally:
         db.close()
 
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    if request.method == 'POST':
+        data = request.get_json()
+        # Your prediction logic goes here (currently mocked data)
+        prediction = "Flood"  # Replace with actual prediction logic
+        probability = 0.8511  # Replace with actual prediction probability
+        return jsonify({'disaster_type': prediction, 'probability': probability})
+    return jsonify({"error": "Invalid request method"}), 405
+
 @app.route('/api/login', methods=['POST'])
 def login():
     """User login endpoint."""
@@ -74,6 +86,8 @@ def login():
         return jsonify({'message': 'Login successful'}), 200
     else:
         return jsonify({'message': 'Invalid credentials'}), 401
+
+
 
 @app.route('/dashboard')
 def dashboard_page():

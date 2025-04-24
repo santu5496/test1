@@ -14,6 +14,7 @@
             height: 100vh;
             margin: 0;
         }
+
         .login-container {
             background-color: #fff;
             padding: 30px;
@@ -21,24 +22,29 @@
             box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
             width: 300px;
         }
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+
+            .login-container h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
         .form-group {
             margin-bottom: 15px;
         }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                box-sizing: border-box;
+            }
+
         .login-button {
             background-color: #4CAF50;
             color: black;
@@ -48,15 +54,22 @@
             cursor: pointer;
             width: 100%;
         }
-        .login-button:hover {
-            background-color: #45a049;
+
+            .login-button:hover {
+                background-color: #45a049;
+            }
+
+        #login-message {
+            margin-top: 10px;
+            color: red;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form action="/login" method="POST">
+        <form id="login-form">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -67,6 +80,43 @@
             </div>
             <button type="submit" class="login-button">Login</button>
         </form>
+        <div id="login-message"></div>
     </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+
+            fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                const msgDiv = document.getElementById('login-message');
+                msgDiv.innerText = result.message;
+
+                if (result.message === 'Login successful') {
+                    msgDiv.style.color = 'green';
+                    setTimeout(() => {
+                        window.location.href = '/dashboard'; // Redirect on success
+                    }, 1000);
+                } else {
+                    msgDiv.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('login-message').innerText = 'An error occurred.';
+            });
+        });
+    </script>
 </body>
 </html>

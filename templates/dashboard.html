@@ -1,427 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Unified Disaster Management Dashboard</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-        <style>
-        body {
-          font-family: Arial, sans-serif;
-          margin: 0;
-          padding: 0;
-          background-color: #1e1e1e;
-          color: #fff;
-        }
-        
-        header {
-          background-color: #282828;
-          color: #fff;
-          padding: 10px 20px;
-          text-align: center;
-          border-bottom: 2px solid #444;
-        }
-        
-        header h1 {
-          margin: 0;
-          font-size: 24px;
-        }
-        
-        header p {
-          margin: 5px 0;
-        }
-        
-        nav {
-          background-color: #333;
-          color: #fff;
-          padding: 10px;
-          border-bottom: 2px solid #444;
-        }
-        
-        nav ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          justify-content: center;
-        }
-        
-        nav li {
-          margin: 0 15px;
-        }
-        
-        nav a {
-          color: #fff;
-          text-decoration: none;
-          font-weight: bold;
-          transition: color 0.3s ease;
-        }
-        
-        nav a:hover {
-          color: #007bff;
-        }
-        
-        main {
-          padding: 20px;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-around;
-        }
-        
-        .dashboard-section {
-          background-color: #282828;
-          border: 1px solid #444;
-          padding: 20px;
-          margin: 10px;
-          border-radius: 5px;
-          width: calc(40% - 20px);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .section-title {
-          color: #fff;
-          border-bottom: 1px solid #444;
-          padding-bottom: 10px;
-          margin-bottom: 15px;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-        
-        .data-form {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-        
-        .form-group {
-          display: flex;
-          flex-direction: column;
-          margin-bottom: 10px;
-        }
-        
-        .form-group label {
-          margin-bottom: 5px;
-          font-weight: bold;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-          padding: 8px;
-          border: 1px solid #444;
-          border-radius: 3px;
-          background-color: #333;
-          color: #fff;
-        }
-        
-        .input-group {
-          display: flex;
-          align-items: center;
-        }
-        
-        .unit {
-          margin-left: 5px;
-          color: #fff;
-        }
-        
-        .predict-btn,
-        .submit-report-btn {
-          background-color: #007bff;
-          color: white;
-          padding: 10px 15px;
-          border: none;
-          border-radius: 3px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-        }
-        
-        .predict-btn:hover,
-        .submit-report-btn:hover {
-          background-color: #0056b3;
-        }
-        
-        .alert-list {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-        
-        .alert-item {
-          background-color: #333;
-          padding: 10px;
-          border-radius: 3px;
-          border: 1px solid #444;
-        }
-        
-        .alert-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 10px;
-        }
-        
-        .severity-high {
-          color: red;
-        }
-        
-        .severity-medium {
-          color: orange;
-        }
-        
-        .severity-low {
-          color: green;
-        }
-        
-        .guideline-cards {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-        }
-        
-        .guideline-card {
-          background-color: #333;
-          padding: 10px;
-          border-radius: 3px;
-          border: 1px solid #444;
-          flex: 1 1 calc(33.33% - 10px);
-        }
-        
-        footer {
-          text-align: center;
-          padding: 10px;
-          background-color: #282828;
-          border-top: 2px solid #444;
-        }
-        </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
 </head>
 <body>
-    <header>
-        <h1><i class="fas fa-shield-alt"></i> Unified Disaster Management Dashboard</h1>
-        <p>Welcome, [User Name]!</p>
-        <button class="logout-btn">Logout</button>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#">Disaster Types</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section id="disaster-prediction" class="dashboard-section">            
-            <h2 class="section-title">
-                <i class="fas fa-chart-line"></i> Disaster Prediction
-              </h2>
-            <form id="weather-data-form" action="#" class="data-form">
-                <div class="form-group">
-                    <i class="fas fa-thermometer-half"></i>
-                    <label for="temperature">Temperature</label>
-                    <div class="input-group">
-                      <input type="number" id="temperature" name="temperature" required />
-                      <span class="unit">°C</span>
-                    </div>                  
-                  </div>
-                  <div class="form-group">
-                    <i class="fas fa-cloud-rain"></i>
-                    <label for="rainfall">Rainfall</label>
-                    <div class="input-group">
-                      <input type="number" id="rainfall" name="rainfall" required />
-                      <span class="unit">mm</span>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <i class="fas fa-wind"></i>
-                    <label for="wind-speed">Wind Speed</label>
+    <h1>Welcome to the Dashboard</h1>
 
-                    <div class="input-group">
-                    <input type="number" id="wind-speed" name="wind-speed" required/>
-                    <span class="unit">km/h</span>
-                </div>
-                <div class="form-group">
-                  <label for="humidity">Humidity (%):</label>
-                  <input type="number" id="humidity" name="humidity" required/>
-                </div>
-                <div class="form-group">
-                    <label for="location">Location</label>
-                    <input type="text" id="location" name="location">
-                </div>
-                <button type="submit" class="predict-btn">Predict Disaster</button>
-              </form>
-              <div id="prediction-outcome">
-                <p>
-                  Based on the current weather data, the likelihood of a flood
-                  occurring is High.
-                </p>
-            </div>
-        </section>
+    <!-- Form for submitting data for prediction -->
+    <form id="weather-data-form">
+        <label for="location">Location1:</label>
+        <input type="text" id="location" name="location" required><br><br>
 
-        <section id="disaster-alerts" class="dashboard-section">
-            <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> Disaster Alerts</h2>
-            <div class="alert-list">
-              <div class="alert-item">
-                  <div class="alert-header">
-                      <h3><i class="fas fa-water"></i> Flood Alert</h3>
-                      <span class="severity-high">High</span>
-                  </div>
-                  <p>Affected Area: Downtown Riverfront</p>
-                  <p>Alert Date & Time: 2024-04-25 08:00</p>
-              </div>
-              <div class="alert-item">
-                  <div class="alert-header">
-                      <h3><i class="fas fa-cloud-showers-heavy"></i> Cyclone/Storm Alert</h3>
-                      <span class="severity-medium">Medium</span>
-                  </div>
-                  <p>Affected Area: Coastal Regions</p>
-                  <p>Alert Date & Time: 2024-04-26 12:00</p>
-              </div>
-              <div class="alert-item">
-                  <div class="alert-header">
-                      <h3><i class="fas fa-mountain"></i> Earthquake Warning</h3>
-                      <span class="severity-low">Low</span>
-                  </div>
-                  <p>Affected Area: Mountainous Area</p>
-                  <p>Alert Date & Time: 2024-04-27 15:30</p>
-              </div>
-            </div>
+        <label for="date">Date:</label>
+        <input type="text" id="date" name="date" required><br><br>
 
-            <!-- Container for active alerts -->
-            <div class="alert-list">
-                <!-- Active alerts will be displayed here -->
-            </div>
-        </section>
+        <label for="temperature">Temperature:</label>
+        <input type="text" id="temperature" name="temperature" required><br><br>
 
-        <section id="report-incident" class="dashboard-section">
-            <h2 class="section-title"><i class="fas fa-bullhorn"></i> Report an Incident</h2>
-            <form id="incident-report-form">
-                <div class="form-group">
-                    <label for="incident-description">Description</label>
-                    <textarea id="incident-description" name="incident-description" required placeholder="Describe the incident..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="incident-location">Location</label>
-                    <div class="input-group">
-                      <i class="fas fa-map-marker-alt"></i>
-                      <input type="text" id="incident-location" name="incident-location" placeholder="Enter location...">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="incident-image">Upload Image:</label>
-                    <input type="file" id="incident-image" name="incident-image" accept="image/*">
-                </div>
-                <button type="submit" class="submit-report-btn">Submit Report</button>
-            </form>
-        </section>
+        <button type="submit">Submit</button>
+    </form>
 
-        <section id="emergency-guidelines" class="dashboard-section">
-          <h2 class="section-title"><i class="fas fa-book"></i> Emergency Guidelines</h2>
-          <div class="guideline-cards">
-          <div class="card-list">
-        <div class="guideline-card">
-            <div class="card-header">
-                <h3>Flood Safety Tips</h3>
-                <button class="expand-btn">+</button>
-            </div>
-            <div class="card-content">
-                <ul>
-                    <li>Move to higher ground.</li>
-                    <li>Stay informed about flood alerts.</li>
-                    <li>Avoid walking or driving through floodwaters.</li>
-                    <li>Turn off utilities if instructed to do so.</li>
-                    <li>Have an emergency kit ready.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="guideline-card">
-            <div class="card-header">
-                <h3>Cyclone Safety Tips</h3>
-                <button class="expand-btn">+</button>
-            </div>
-            <div class="card-content">
-                <ul>
-                    <li>Stay indoors during a cyclone.</li>
-                    <li>Board up or protect windows.</li>
-                    <li>Monitor weather reports closely.</li>
-                    <li>Have a supply of food, water, and medicines.</li>
-                    <li>Secure loose objects around your property.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="guideline-card">
-            <div class="card-header">
-                <h3>Earthquake Safety Tips</h3>
-                <button class="expand-btn">+</button>
-            </div>
-            <div class="card-content">
-                <ul>
-                    <li>Drop, cover, and hold on.</li>
-                    <li>Stay away from windows and heavy objects.</li>
-                    <li>If outside, move to an open area away from buildings.</li>
-                    <li>Aftershocks can occur; be prepared.</li>
-                    <li>Check for injuries and damage after the shaking stops.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="guideline-card">
-            <div class="card-header">
-                <h3>Fire Safety Tips</h3>
-                <button class="expand-btn">+</button>
-            </div>
-            <div class="card-content">
-                <ul>
-                    <li>Have working smoke alarms.</li>
-                    <li>Know two ways out of every room.</li>
-                    <li>Stop, drop, and roll if your clothes catch fire.</li>
-                    <li>Don't overload electrical outlets.</li>
-                    <li>Have a fire extinguisher and know how to use it.</li>
-                </ul>
-            </div>
-        </div>
-        <div class="guideline-card">
-          <div class="card-header">
-            <h3>Wildfire Safety Tips</h3>
-            <button class="expand-btn">+</button>
-          </div>
-          <div class="card-content">
-            <p>Stay informed, clear vegetation, have a plan.</p>
-          </div>
-        </div>
-      </div>
-                </div>
-              </section>
-              </main>
-              <footer>
-        <p>&copy; 2024 Disaster Management System</p>
-      </footer>
-      <script>
-        document.getElementById('weather-data-form').addEventListener('submit', function(event) {
+    <!-- Display Prediction Result -->
+    <div id="prediction-outcome"></div>
+
+    <script>
+        document.getElementById('weather-data-form').addEventListener('submit', function (event) {
             event.preventDefault();
+
             const formData = new FormData(this);
             const data = {};
             formData.forEach((value, key) => {
                 data[key] = value;
             });
-            fetch('http://127.0.0.1:5000/predict', {
+
+            // Send the form data to the /predict endpoint
+            fetch('/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
             })
-            .then(response => response.json())
-            .then(data => {
-                const predictionOutcome = document.getElementById('prediction-outcome');
-                predictionOutcome.innerHTML = ''; 
-                for (const key in data) {
-                    const paragraph = document.createElement('p');
-                    paragraph.textContent = `${key}: ${data[key]}`;
-                    predictionOutcome.appendChild(paragraph);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const predictionOutcome = document.getElementById('prediction-outcome');
+                    predictionOutcome.innerHTML = ''; // Clear any previous predictions
+
+                    // Display the prediction results
+                    for (const key in data) {
+                        const paragraph = document.createElement('p');
+                        paragraph.textContent = `${key}: ${data[key]}`;
+                        predictionOutcome.appendChild(paragraph);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const predictionOutcome = document.getElementById('prediction-outcome');
+                    predictionOutcome.innerHTML = 'There was an error processing your request.';
+                });
         });
-      </script>
-      </body>
-      </html>
+    </script>
+</body>
+</html>

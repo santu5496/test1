@@ -52,16 +52,25 @@ def register():
     db.session.commit()
     return jsonify({'message': 'User created successfully'}), 201
 
-@app.route('/predict', methods=['POST'])  # Make sure you have methods=['POST']
+@app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
         data = request.get_json()
-        # ... Your prediction logic using the data ...
-        # ... Example: Let's just return some dummy data for now ...
-        prediction = "Flood"  # Replace with your actual prediction
-        probability = 0.85  # Replace with your actual probability
+        temperature = data.get('temperature')
+        rainfall = data.get('rainfall')
+        wind_speed = data.get('wind-speed')
+        humidity = data.get('humidity')
+        location = data.get('location')
+
+        # Perform prediction logic here (replace with your actual model or logic)
+        prediction = "Flood"  # Example prediction
+        probability = 0.85  # Example probability
+
+        # Return the prediction and probability
         return jsonify({'disaster_type': prediction, 'probability': probability})
-    return "not"
+
+    return "Invalid method", 400
+
 
 
 @app.route('/')
