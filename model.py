@@ -1,17 +1,14 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-import joblib
-from sklearn.metrics import accuracy_score
 import random
+import pandas as pd
+import joblib
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 class DisasterPredictor:
     def __init__(self):
         self.model = RandomForestClassifier(random_state=42)
-        self.data = None
         self.model_filename = "disaster_model.pkl"
-        self.X = None
-        self.y = None
 
     def _generate_random_data(self, num_samples=1000):
         data = []
@@ -43,20 +40,21 @@ class DisasterPredictor:
             self.model = joblib.load(self.model_filename)
         except FileNotFoundError:
             self.train()
+
     def train(self):
-        self.data = self._generate_random_data()
-        self.X = self.data[['temperature', 'rainfall', 'wind_speed', 'humidity']]
-        self.y = self.data['disaster_type']
-        X_train, X_test, y_train, y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
+        data = self._generate_random_data()
+        X = data[['temperature', 'rainfall', 'wind_speed', 'humidity']]
+        y = data['disaster_type']
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         self.model.fit(X_train, y_train)
-        y_pred = self.model.predict(X_test)
-        accuracy = accuracy_score(y_test, y_pred)
+        accuracy = accuracy_score(y_test, self.model.predict(X_test))
         self.save_model()
-        print(f"Model accuracy: {accuracy}")
-        
+        print(f"Model trained with accuracy: {accuracy}")
+
     def predict(self, input_data):
-        if self.model is None or self.data is None:
-            raise Exception("Model not trained yet. Call the 'train' method first.")
         input_df = pd.DataFrame([input_data], columns=['temperature', 'rainfall', 'wind_speed', 'humidity'])
-        prediction = self.model.predict(input_df)
-        return prediction[0]
+        prediction = self.model.predict(input_df)[0]
+        class_index = list(self.model.classes_).index(prediction)
+        probability = self.model.predict_proba(input_df)[0][class_index]
+        will_occur = "Yes" if probability > 0.5 else "No"
+        return prediction, probability, will_occur
