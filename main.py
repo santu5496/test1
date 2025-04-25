@@ -9,11 +9,13 @@ DATABASE = 'database/flood_management.db'
 predictor = DisasterPredictor()
 predictor.load_model()
 
+# Database connection
 def get_db():
     db = sqlite3.connect(DATABASE)
-    db.row_factory = sqlite3.Row
+    db.row_factory = sqlite3.Row  # This allows row results to be accessed like a dictionary
     return db
 
+# Initialize the database schema
 def init_db():
     db = get_db()
     with open('schema.sql', 'r') as f:
@@ -21,6 +23,7 @@ def init_db():
     db.commit()
     db.close()
 
+# Create DB if it doesn't exist
 @app.before_request
 def before_request():
     if not os.path.exists(DATABASE):
@@ -31,6 +34,7 @@ def before_request():
 def index():
     return render_template('login.html')
 
+# Register a new user
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -51,6 +55,7 @@ def register():
     finally:
         db.close()
 
+# Login route: Verify the user from the database
 @app.route('/api/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -62,14 +67,24 @@ def login():
 
     db = get_db()
     cursor = db.cursor()
+    
+    # Query to check if the user exists in the database
     cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
     user = cursor.fetchone()
 
     if user:
-        return jsonify({'message': 'Login successful'}), 200
+        # If user found, return a success message and user data
+        return jsonify({
+            'message': 'Login successful',
+            'user': {
+                'id': user['id'],
+                'username': user['username']
+            }
+        }), 200
     else:
         return jsonify({'message': 'Invalid username or password'}), 401
 
+# Disaster prediction route
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -89,6 +104,7 @@ def predict():
             'humidity': humidity
         }
 
+        # Using the DisasterPredictor model to predict
         prediction, probability, will_occur = predictor.predict(input_data)
 
         return jsonify({
@@ -100,6 +116,7 @@ def predict():
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
+# Dashboard page
 @app.route('/dashboard')
 def dashboard_page():
     return render_template('dashboard.html')
