@@ -34,7 +34,11 @@ def before_request():
 def index():
     return render_template('login.html')
 
-# Register a new user
+# Register a new user (GET method to render registration form, POST to process registration)
+@app.route('/register', methods=['GET'])
+def register_page():
+    return render_template('registrationform.html')  # Make sure this file exists in the templates folder
+
 @app.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
@@ -121,5 +125,11 @@ def predict():
 def dashboard_page():
     return render_template('dashboard.html')
 
+# Route to redirect to the registration page if the user does not exist
+
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 3000)))
+@app.route('/register')
+def register_page():
+    return render_template('registrationform.html')

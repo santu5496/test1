@@ -3,117 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login | YourBrand</title>
     <style>
+        :root {
+            --primary-color: #4285F4;
+            --primary-hover: #357AE8;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --border-color: #ddd;
+            --success-color: #34A853;
+            --error-color: #EA4335;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-gray);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            color: var(--text-color);
         }
 
         .login-container {
             background-color: #fff;
-            padding: 30px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-            width: 300px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 360px;
         }
 
-        .login-container h2 {
+        .brand {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .brand h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .brand p {
+            margin-top: 5px;
+            color: #666;
+            font-size: 14px;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            position: relative;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
             box-sizing: border-box;
+            font-size: 16px;
+            transition: border 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
         }
 
         .login-button {
-            background-color: #4CAF50;
-            color: black;
-            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 15px;
             border: none;
-            border-radius: 3px;
+            border-radius: 5px;
             cursor: pointer;
             width: 100%;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
         }
 
         .login-button:hover {
-            background-color: #45a049;
+            background-color: var(--primary-hover);
         }
 
         #login-message {
-            margin-top: 10px;
-            color: red;
+            margin-top: 15px;
             text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .message-error {
+            color: var(--error-color);
+            background-color: rgba(234, 67, 53, 0.1);
+        }
+
+        .message-success {
+            color: var(--success-color);
+            background-color: rgba(52, 168, 83, 0.1);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 14px;
+        }
+
+        .form-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .form-footer a:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                width: 100%;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <div class="brand">
+            <h1>YourBrand</h1>
+            <p>Sign in to continue to your account</p>
+        </div>
         <form id="login-form">
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
             </div>
-            <button type="submit" class="login-button">Login</button>
+            <button type="submit" class="login-button">Sign In</button>
         </form>
         <div id="login-message"></div>
+        <div class="form-footer">
+            <p>Don't have an account? <a href="/register">Register</a></p>
+        </div>
     </div>
     <script>
         document.getElementById('login-form').addEventListener('submit', function (event) {
             event.preventDefault();
-    
+
             const formData = new FormData(this);
             const data = {};
             formData.forEach((value, key) => data[key] = value);
-    
+
+            // Clear previous message
+            const msgDiv = document.getElementById('login-message');
+            msgDiv.innerText = '';
+            msgDiv.className = '';
+
+            // Show loading state
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerText;
+            submitButton.innerText = 'Signing in...';
+            submitButton.disabled = true;
+
             fetch('/api/login', {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             })
             .then(response => response.json())
             .then(result => {
-                const msgDiv = document.getElementById('login-message');
+                submitButton.innerText = originalText;
+                submitButton.disabled = false;
+
                 msgDiv.innerText = result.message;
-    
+
                 if (result.message === 'Login successful') {
-                    msgDiv.style.color = 'green';
+                    msgDiv.className = 'message-success';
                     setTimeout(() => {
-                        window.location.href = '/dashboard'; // Redirect on success
+                        window.location.href = '/dashboard'; // Redirect to the dashboard on success
                     }, 1000);
+                } else if (result.message === 'User not found') {
+                    // Show error message but provide registration link
+                    msgDiv.className = 'message-error';
+                    msgDiv.innerHTML = 'User not found. Please <a href="/register">register</a> to create an account.';
                 } else {
-                    msgDiv.style.color = 'red';
+                    msgDiv.className = 'message-error';
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                document.getElementById('login-message').innerText = 'An error occurred.';
+                submitButton.innerText = originalText;
+                submitButton.disabled = false;
+                msgDiv.innerText = 'A connection error occurred. Please try again.';
+                msgDiv.className = 'message-error';
             });
         });
     </script>
